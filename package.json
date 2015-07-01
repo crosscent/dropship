@@ -8,12 +8,14 @@
   },
   "author": "Roy Chiang",
   "engines": {
-  "node": "0.12.0",
-  "npm": "*"
+    "node": "0.12.0",
+    "npm": "*"
   },
   "license": "MIT",
   "dependencies": {
-    "forever": "^0.14.2"
+    "express": "^4.13.0",
+    "forever": "^0.14.2",
+    "lodash": "^3.10.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

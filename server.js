@@ -1,6 +1,12 @@
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+'use strict';
+
+var init = require('./config/init')(),
+  config = require('./config/config');
+
+var app = require('./config/express')();
+
+app.listen(config.port);
+
+exports = module.exports = app;
+
+console.log('server has started on port' + config.port);
