@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   var watchFiles = {
@@ -64,6 +66,14 @@ module.exports = function(grunt) {
         src: watchFiles.clientCSS
       }
     },
+    jshint: {
+			all: {
+				src: watchFiles.clientJS.concat(watchFiles.serverJS),
+				options: {
+					jshintrc: true
+				}
+			}
+		},
     'node-inspector': {
 			custom: {
 				options: {
