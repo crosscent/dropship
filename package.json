@@ -6,10 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Roy Chiang",
+  "engines": {
+  "node": "0.12.0",
+  "npm": "*"
+  },
   "license": "MIT",
   "dependencies": {
-    "forever": "^0.14.1"
+    "forever": "^0.14.2"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
