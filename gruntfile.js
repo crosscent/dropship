@@ -66,6 +66,13 @@ module.exports = function(grunt) {
         src: watchFiles.clientCSS
       }
     },
+    cssmin: {
+      combine: {
+        files: {
+          'public/dist/application.min.css': '<%= applicationCSSFiles %>'
+        }
+      }
+    },
     jshint: {
 			all: {
 				src: watchFiles.clientJS.concat(watchFiles.serverJS),
@@ -113,7 +120,19 @@ module.exports = function(grunt) {
   // Making grunt default to force in order not to break the project.
   grunt.option('force', true);
 
+  // A Task for loading the configuration object
+  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+    var init = require('./config/init')();
+    var config = require('./config/config');
+
+    grunt.config.set('applicationJavaScriptFiles', config.assets.js);
+    grunt.config.set('applicationCSSFiles', config.assets.css);
+  });
+
   // Default task(s).
 	grunt.registerTask('default', ['jshint', 'csslint', 'concurrent:default']);
+
+  // Build task(s).
+  grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig', 'uglify', 'cssmin']);
 
 };
