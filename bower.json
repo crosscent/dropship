@@ -1,0 +1,11 @@
+{
+  "name": "senseforage",
+  "version": "0.1.0",
+  "homepage": "https://github.com/crosscent/dropship",
+  "description": "Dropshipping platfor using MEAN stack",
+  "main": "server.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

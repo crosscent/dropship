@@ -24,14 +24,32 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 	// The output array
 	var output = [];
 
-	var files = glob.sync(globPatterns);
-	
-	if (removeRoot) {
-	    files = files.map(function(file) {
-	        return file.replace(removeRoot, '');
-	    });
+	// If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob
+	if (_.isArray(globPatterns)) {
+		globPatterns.forEach(function(globPattern) {
+			output = _.union(output, _this.getGlobbedFiles(globPattern, removeRoot));
+		});
+	} else if (_.isString(globPatterns)) {
+		if (urlRegex.test(globPatterns)) {
+			output.push(globPatterns);
+		} else {
+			var files = glob.sync(globPatterns);
+			if (removeRoot) {
+			    files = files.map(function(file) {
+			        return file.replace(removeRoot, '');
+			    });
+			}
+			output = _.union(output, files);
+		}
 	}
-	output = _.union(output, files);
 
+	return output;
+};
+
+/**
+ * Get the modules CSS files
+ */
+module.exports.getCSSAssets = function() {
+	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), '');
 	return output;
 };
