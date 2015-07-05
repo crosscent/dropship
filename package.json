@@ -15,8 +15,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.13.1",
     "bower": "~1.4.1",
     "express": "^4.13.0",
+    "express-session": "^1.11.3",
     "forever": "^0.14.2",
     "glob": "^5.0.12",
     "jade": "^1.11.0",

@@ -1,0 +1,12 @@
+extends layout.jade
+
+block content
+  H1 Enter your credentials
+  form(action="/login", method="POST")
+    div(class="form-group")
+      label Email
+      input(type="email" class="form-control" placeholder="Email" name="email")
+    div(class="form-group")
+      label Password
+      input(type="password" class="form-control" placeholder="Password" name="password")
+    button(type="submit" class="btn btn-default") Login
