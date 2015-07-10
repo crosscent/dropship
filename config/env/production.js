@@ -9,7 +9,8 @@ module.exports = {
 			],
 			js: [
 				'public/lib/angular/angular.min.js',
-				'public/lib/angular-resource/angular-resource.js'
+				'public/lib/angular-resource/angular-resource.js',
+				'public/lib/angular-cookies/angular-cookies.js',
 			]
 		},
 		css: 'public/dist/application.min.css',
