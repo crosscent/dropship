@@ -12,7 +12,8 @@
     "angular-ui-router": "~0.2.15",
     "angular-resource": "~1.4.1",
     "angular-cookies": "~1.4.2",
-    "angular-slugify": "~1.0.0"
+    "angular-slugify": "~1.0.0",
+    "angulartics": "~0.19.0"
   },
   "resolutions": {
     "angular": "~1.4.1"

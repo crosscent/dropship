@@ -15,7 +15,9 @@ module.exports = {
 				'public/lib/angular-cookies/angular-cookies.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-slugify/angular-slugify.js'
+				'public/lib/angular-slugify/angular-slugify.js',
+				'public/lib/angulartics/src/angulartics.js',
+				'public/lib/angulartics/src/angulartics-ga.js'
 			]
 		},
 		css: [
