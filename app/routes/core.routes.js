@@ -9,5 +9,8 @@ module.exports = function(app) {
 	app.post('/login', user.auth);
 	app.all('/backend', user.restrict, admin.index);
 	app.all('/backend/*', user.restrict, admin.index);
-	app.get('/*', core.index);
+	app.all('/*/', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.render('index.jade', { root: __dirname });
+});
 };

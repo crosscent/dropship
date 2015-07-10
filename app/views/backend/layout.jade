@@ -4,7 +4,7 @@ html(lang="en", xmlns="http://www.w3.org/1999/xhtml")
   head
     title SenseForage
     for cssFile in cssFiles
-      link(rel="stylesheet", href=cssFile)
+      link(rel="stylesheet", href='/'+cssFile)
     base(href="/")
   body(class="ng-cloak")
     header(ng-include="'public/modules/backend/views/header.client.view.html'", class="navbar")
