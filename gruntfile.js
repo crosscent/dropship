@@ -49,15 +49,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
-      }
-    },
+		uglify: {
+			production: {
+				options: {
+					mangle: false
+				},
+				files: {
+					'public/dist/application.min.js': 'public/dist/application.js'
+				}
+			}
+		},
     csslint: {
       options: {
         csslintrc: '.csslintrc',
@@ -91,6 +92,13 @@ module.exports = function(grunt) {
 					'no-preload': true,
 					'stack-trace-limit': 50,
 					'hidden': []
+				}
+			}
+		},
+		ngAnnotate: {
+			production: {
+				files: {
+					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
 				}
 			}
 		},
@@ -133,6 +141,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['jshint', 'csslint', 'concurrent:default']);
 
   // Build task(s).
-  grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 };
