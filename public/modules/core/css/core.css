@@ -2,3 +2,44 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+
+.navbar {
+	font-family: 'Source Sans Pro', sans-serif;
+	background-color: #ffffff;
+}
+.brand-name {
+	text-align: center;
+	padding-top: 0.9em;
+}
+.brand-name a {
+	color: black;
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	font-size: 2em;
+	text-decoration: none;
+}
+.brand-name:hover{
+	text-decoration: none;
+}
+.navbar {
+	padding-bottom: 1em;
+	border-bottom: 1px #DCDCDC solid;
+	margin-bottom: 5px;
+}
+.navbar-nav > li > a {
+	color: #5c5c5c;
+	padding: 2em 1em 0 1em;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+.navbar-nav .active a	 {
+	color: #FF5252;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+	background-color: #FFF;
+}
