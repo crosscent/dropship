@@ -9,6 +9,5 @@ module.exports = function(app) {
 	app.post('/login', user.auth);
 	app.all('/backend', user.restrict, admin.index);
 	app.all('/backend/*', user.restrict, admin.index);
-	app.all('/partials/:name', core.partials);
 	app.get('/*', core.index);
 };
