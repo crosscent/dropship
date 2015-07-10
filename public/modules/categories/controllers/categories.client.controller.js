@@ -45,7 +45,7 @@ app.controller('CategoriesEditController', ['$scope', '$stateParams', '$location
 		this.update = function() {
 			// Create new Category object
 			var category = $scope.category;
-      category.slug = Slug.slugify($scope.name);
+      category.slug = Slug.slugify(category.name);
       category.$update(function(){
         $location.path('/backend/category');
       }, function(errorResponse) {

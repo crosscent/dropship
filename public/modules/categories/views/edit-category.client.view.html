@@ -1,12 +1,37 @@
-<section data-ng-controller="CategoriesEditController as categoriesEditCtrl" data-ng-init="categoriesEditCtrl.findBySlug()">
+<section data-ng-controller="CategoriesEditController as categoriesEditCtrl" data-ng-init="categoriesEditCtrl.findBySlug()" class="categoryEdit">
   <div class="container">
     <h1 data-ng-bind="$stateParams.slug"></h1>
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
         <div class="row">
-          <form data-ng-submit="categoriesEditCtrl.update()">
+          <form data-ng-submit="categoriesEditCtrl.update(category)">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-2">
+                <div class="form-group">
+                  <textarea type="text" class="form-control title" data-ng-model="category.name" id="name"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Description</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control description" data-ng-model="category.description" id="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Publish?</p>
+              </div>
+              <div class="col-sm-10">
+                <select data-ng-model="category.publish" data-ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"></select>
+              </div>
+            </div>
             <div class="form-group">
-              <input type="text" class="form-control" data-ng-model="category.name" id="name">
+              <input type="submit" value="Update" class="btn btn-default">
             </div>
           </form>
         </div>

@@ -130,7 +130,7 @@ app.controller('CategoriesEditController', ['$scope', '$stateParams', '$location
 		this.update = function() {
 			// Create new Category object
 			var category = $scope.category;
-      category.slug = Slug.slugify($scope.name);
+      category.slug = Slug.slugify(category.name);
       category.$update(function(){
         $location.path('/backend/category');
       }, function(errorResponse) {
@@ -145,7 +145,7 @@ app.controller('CategoriesEditController', ['$scope', '$stateParams', '$location
 //Categories service used to communicate Categories REST endpoints
 angular.module('core').factory('Categories', ['$resource', '$cookies',
 	function($resource, $cookies) {
-		return $resource('//calm-woodland-4818.herokuapp.com/api/categories/:controller', '',
+		return $resource('//calm-woodland-4818.herokuapp.com/api/categories/:categoryId/:controller', { categoryId: '@id'},
     {
 			list: {
 				method: 'GET'
@@ -159,6 +159,10 @@ angular.module('core').factory('Categories', ['$resource', '$cookies',
 				params: {
 					controller: 'findOne'
 				}
+			},
+			update: {
+				method: 'PUT',
+				headers: {'Authorization': $cookies.get('user')}
 			}
 		});
 	}
