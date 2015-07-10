@@ -1,0 +1,16 @@
+<section data-ng-controller="CategoriesEditController as categoriesEditCtrl" data-ng-init="categoriesEditCtrl.findBySlug()">
+  <div class="container">
+    <h1 data-ng-bind="$stateParams.slug"></h1>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+          <form data-ng-submit="categoriesEditCtrl.update()">
+            <div class="form-group">
+              <input type="text" class="form-control" data-ng-model="category.name" id="name">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
