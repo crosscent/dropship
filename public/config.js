@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'sense-forage';
-	var applicationModuleVendorDependencies = ['ui.bootstrap', 'ui.router'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ui.bootstrap', 'ui.router'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

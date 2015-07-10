@@ -8,10 +8,11 @@ var http = require('http');
  * Login Page
  */
 exports.login = function(req, res, next) {
-	res.render('backend/login', {
-		user: req.user || null,
-		request: req
-	});
+	if(req.cookies.user){
+		res.redirect('/backend');
+	} else {
+		res.render('backend/login');
+	}
 };
 
 /**
@@ -38,33 +39,27 @@ exports.auth = function(req, res, next) {
 		response.setEncoding('utf8');
 		response.on('data', function (chunk) {
 			if (response.statusCode===200) {
-				req.session.regenerate(function(){
-					req.session.user = JSON.parse(chunk).id;
-					res.redirect('/admin');
-				});
-			}
+				res.cookie('user', JSON.parse(chunk).id);
+				res.redirect('/backend');
+				}
 			else {
-				res.send('failed');
+				req.session.error = 'Access denied!';
+				res.redirect('/login');
 			}
-  	});
+		});
 	});
 	auth.write(login);
 	auth.end();
 };
-/**
- * Admin Page
- */
-exports.admin = function(req, res, next) {
-	res.send('welcome to the admin page');
-};
+
 /**
  * Restrict Middleware
  */
 exports.restrict = function(req, res, next) {
-	if(req.session.user ){
+	if(req.cookies.user){
 		next();
 	} else {
-		req.session.error = 'Access denied!';
+		res.cookie.error = 'Access denied!';
 		res.redirect('/login');
 	}
 };

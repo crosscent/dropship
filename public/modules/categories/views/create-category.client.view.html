@@ -1,0 +1,10 @@
+<section data-ng-controller="CategoriesCreateController as categoriesCreateCtrl">
+  <div class="container">
+    <form data-ng-submit="categoriesCreateCtrl.create()">
+      <div class="form-group">
+        <label for="exampleInputEmail1">New Category</label>
+        <input type="text" class="form-control" data-ng-model="name" id="name" placeholder="Start typing a title for the category here....">
+      </div>
+    </form>
+  </div>
+</section>

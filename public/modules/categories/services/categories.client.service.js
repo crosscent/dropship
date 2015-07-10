@@ -1,9 +1,9 @@
 'use strict';
 
 //Categories service used to communicate Categories REST endpoints
-angular.module('categories').factory('Categories', ['$resource',
+angular.module('core').factory('Categories', ['$resource',
 	function($resource) {
-		return $resource('https://hudson-leaf-4774.herokuapp.com/api/category', '',
+		return $resource('http://calm-woodland-4818.herokuapp.com/api/categories', '',
     {
 			list: {
 				method: 'GET'

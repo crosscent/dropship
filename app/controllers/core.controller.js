@@ -9,3 +9,8 @@ exports.index = function(req, res, next) {
 		request: req
 	});
 };
+exports.partials = function(req, res) {
+    var name = req.params.name;
+    console.log('Hurah!');
+    res.render('../public/modules/' + name);
+};

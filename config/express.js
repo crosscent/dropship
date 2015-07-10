@@ -5,7 +5,8 @@ var express = require('express'),
 	config = require('./config'),
   path = require('path'),
   bodyParser = require('body-parser'),
-  session = require('express-session');
+  session = require('express-session'),
+  cookieParser = require('cookie-parser');
 
 module.exports = function() {
   // Initialize Express
@@ -29,12 +30,8 @@ module.exports = function() {
     extended: true
   }));
   app.use(bodyParser.json());
-  // set express-session
-  app.use(session({
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
-    secret: 'shhhh, very secret'
-  }));
+  // set cookieParser
+  app.use(cookieParser());
 
   // Setting the app router and static folder
   app.use('/public', express.static(path.resolve('./public')));
