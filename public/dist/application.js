@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'sense-forage';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router', 'slugifier'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -60,11 +60,26 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		state('backendIndex', {
 			url: '/backend',
 			templateUrl: '/public/modules/backend/views/index.client.view.html'
-		}).
-		state('backendCategory', {
-			url: '/backend/category',
-			templateUrl: '/public/modules/categories/views/create-category.client.view.html'
 		});
+	}
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('core').config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+
+		// Home state routing
+		$stateProvider.
+    state('backendCategory', {
+      url: '/backend/category',
+      templateUrl: '/public/modules/categories/views/create-category.client.view.html'
+    }).
+    state('backendCategoryEdit', {
+      url: '/backend/category/:slug/edit',
+      templateUrl: '/public/modules/categories/views/edit-category.client.view.html'
+    });
 	}
 ]);
 
@@ -73,25 +88,54 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 var app = angular.module('core');
 
 // Categories controller
-app.controller('CategoriesCreateController', ['$scope', '$location', 'Categories',
-	function($scope, $location, Categories){
+app.controller('CategoriesCreateController', ['$scope', '$location', 'Slug', 'Categories',
+	function($scope, $location, Slug, Categories){
+
+    // Listing the Categories
+    $scope.categories = Categories.query();
 
 		// Create new Category
 		this.create = function() {
 			// Create new Category object
 			var category = new Categories ({
-				name: $scope.name
+				name: $scope.name,
+        slug: Slug.slugify($scope.name)
 			});
 
 			// Redirect after save
 			category.$save(function(response) {
-				$location.path('categories/' + response._id);
-
+				$location.path('/backend/category');
+        $scope.categories = Categories.query();
 				// Clear form fields
 				$scope.name = '';
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+	}
+]);
+
+app.controller('CategoriesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Categories',
+	function($scope, $stateParams, $location, Slug, Categories){
+
+    // Find existing Product
+		this.findBySlug = function() {
+			$scope.category = Categories.filter(
+				{'filter[where][slug]': $stateParams.slug}
+			);
+		};
+
+		// Create new Category
+		this.update = function() {
+			// Create new Category object
+			var category = $scope.category;
+      category.slug = Slug.slugify($scope.name);
+      category.$update(function(){
+        $location.path('/backend/category');
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
 		};
 	}
 ]);
@@ -101,7 +145,7 @@ app.controller('CategoriesCreateController', ['$scope', '$location', 'Categories
 //Categories service used to communicate Categories REST endpoints
 angular.module('core').factory('Categories', ['$resource', '$cookies',
 	function($resource, $cookies) {
-		return $resource('http://calm-woodland-4818.herokuapp.com/api/categories', '',
+		return $resource('http://calm-woodland-4818.herokuapp.com/api/categories/:controller', '',
     {
 			list: {
 				method: 'GET'
@@ -109,6 +153,12 @@ angular.module('core').factory('Categories', ['$resource', '$cookies',
 			save: {
 				method: 'POST',
 				headers: {'Authorization': $cookies.get('user')}
+			},
+			filter: {
+				method: 'GET',
+				params: {
+					controller: 'findOne'
+				}
 			}
 		});
 	}
@@ -120,7 +170,7 @@ angular.module('core').factory('Categories', ['$resource', '$cookies',
 angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 		// Redirect to home view when route not found
-		$urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/404');
 
 		// Home state routing
 		$stateProvider.
