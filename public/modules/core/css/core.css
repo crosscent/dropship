@@ -41,5 +41,6 @@ html {
 
 .nav > li > a:hover,
 .nav > li > a:focus {
+	color: #FF5252;
 	background-color: #FFF;
 }

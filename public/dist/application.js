@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'sense-forage';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'slugifier', 'angulartics', 'angulartics.google.analytics'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ui.utils', 'slugifier', 'angulartics', 'angulartics.google.analytics'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -48,6 +48,18 @@ angular.element(document).ready(function() {
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('core').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
+    // Set top bar menu items
+		Menus.addMenuItem('topbar', 'Articles', 'articles', 'item', '/articles(?:/[^/]+)?', null, null, 2);
+	}
+]);
 
 'use strict';
 
@@ -408,14 +420,6 @@ angular.module('core').service('Menus', [
 		this.addMenu('topbar', true);
 	}
 ]);
-
-angular.module('core').factory('PageTitle', function() {
-  var title = 'Productmate';
-  return {
-    title: function() { return title; },
-    setTitle: function(newTitle) { title = newTitle; }
-  };
-});
 
 'use strict';
 
