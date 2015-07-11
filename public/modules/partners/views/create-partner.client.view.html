@@ -1,0 +1,29 @@
+<section data-ng-controller="PartnersCreateController as partnersCreateCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <form data-ng-submit="partnersCreateCtrl.create()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">New Partner</label>
+              <input type="text" class="form-control" data-ng-model="name" id="name" placeholder="Start typing a title for the partner here....">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <a href="#" data-ng-repeat="partner in unpublished" data-ng-href="/backend/partner/{{partner.slug}}/edit">
+          <p data-ng-bind="partner.name"></p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h1>Published</h1>
+        <div class="row">
+          <a href="#" data-ng-repeat="partner in published" data-ng-href="/backend/partner/{{partner.slug}}/edit">
+          <p data-ng-bind="partner.name"></p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

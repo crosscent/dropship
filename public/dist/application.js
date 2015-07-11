@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'sense-forage';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router', 'slugifier', 'angulartics', 'angulartics.google.analytics'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'slugifier', 'angulartics', 'angulartics.google.analytics'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -104,7 +104,21 @@ app.controller('CategoriesCreateController', ['$scope', '$location', 'Slug', 'Ca
 	function($scope, $location, Slug, Categories){
 
     // Listing the Categories
-    $scope.categories = Categories.query();
+		$scope.published = [];
+		$scope.unpublished = [];
+    Categories.query().$promise.then(function(list){
+		$scope.categories = list;
+		for(var i=0; i< list.length; i++) {
+			if (list[i].publish === 'true') {
+				$scope.published.push(list[i]);
+			}
+			else {
+				$scope.unpublished.push(list[i]);
+			}
+		}
+		});
+
+
 
 		// Create new Category
 		this.create = function() {
@@ -192,7 +206,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		$stateProvider.
 		state('home', {
 			url: '/',
-			templateUrl: '/public/modules/core/views/home.client.view.html'
+			templateUrl: '/public/modules/core/views/home.client.view.html',
+			data: {
+				pageTitle: 'Home'
+			}
 		}).
     state('about', {
 			url: '/about',
@@ -389,6 +406,192 @@ angular.module('core').service('Menus', [
 
 		//Adding the topbar menu
 		this.addMenu('topbar', true);
+	}
+]);
+
+angular.module('core').factory('PageTitle', function() {
+  var title = 'Productmate';
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { title = newTitle; }
+  };
+});
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('core').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
+    // Set top bar menu items
+		Menus.addMenuItem('topbar', 'Partners', 'partner', 'item', '/partner(?:/[^/]+)?', null, null, 7);
+	}
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('core').config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+
+		// Home state routing
+		$stateProvider.
+    state('frontendPartner', {
+      url: '/partner',
+      templateUrl: '/public/modules/partners/views/list-partner.client.view.html'
+    }).
+    state('frontendPartnerView', {
+      url: '/partner/:slug',
+      templateUrl: '/public/modules/partners/views/view-partner.client.view.html',
+			data: {
+				pageTitle: 'Page View'
+			}
+    }).
+    state('backendPartner', {
+      url: '/backend/partner',
+      templateUrl: '/public/modules/partners/views/create-partner.client.view.html'
+    }).
+    state('backendPartnerEdit', {
+      url: '/backend/partner/:slug/edit',
+      templateUrl: '/public/modules/partners/views/edit-partner.client.view.html'
+    });
+	}
+]);
+
+'use strict';
+
+var app = angular.module('core');
+
+// Partners controller
+app.controller('PartnersController', ['$scope', '$rootScope', '$stateParams', 'Partners',
+	function($scope, $rootScope, $stateParams, Partners) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'Partner List';
+		this.partners = Partners.query(
+			{'filter[where][published]': 'true'}
+		);
+
+		// Find existing Partner
+		this.findBySlug = function() {
+			Partners.filter(
+				{'filter[where][slug]': $stateParams.slug}
+			).$promise.then(function(item){
+				$scope.partner = item;
+				$rootScope.pageTitle = item.name;
+			});
+			$scope.slides = [1,2,3,4,5];
+		};
+	}
+]);
+
+app.controller('PartnersCreateController', ['$scope', '$location', 'Slug', 'Partners',
+	function($scope, $location, Slug, Partners){
+
+    // Listing the Partners
+		$scope.published = [];
+		$scope.unpublished = [];
+    Partners.query().$promise.then(function(list){
+		$scope.partners = list;
+		for(var i=0; i< list.length; i++) {
+			if (list[i].published === true) {
+				$scope.published.push(list[i]);
+			}
+			else {
+				$scope.unpublished.push(list[i]);
+			}
+		}
+		});
+
+		// Create new Category
+		this.create = function() {
+			// Create new Category object
+			var partner = new Partners ({
+				name: $scope.name,
+        slug: Slug.slugify($scope.name)
+			});
+
+			// Redirect after save
+			partner.$save(function(response) {
+				$location.path('/backend/partner');
+        $scope.partner = Partners.query();
+				// Clear form fields
+				$scope.name = '';
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+
+app.controller('PartnersEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Partners',
+	function($scope, $stateParams, $location, Slug, Partners){
+
+    // Find existing Product
+		this.findBySlug = function() {
+			$scope.partner = Partners.filter(
+				{'filter[where][slug]': $stateParams.slug}
+			);
+		};
+
+		// Create new Category
+		this.update = function() {
+			// Create new Category object
+			var partner = $scope.partner;
+      partner.slug = Slug.slugify(partner.name);
+      partner.$update(function(){
+        $location.path('/backend/partner');
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+		};
+
+    // Add a new image
+    this.addHeader = function() {
+      var partner = $scope.partner;
+      if(!partner.header) {
+        partner.header=[];
+      }
+      partner.header.push({link: ''});
+    };
+
+    // Delete image
+    this.deleteHeader = function(index) {
+      var partner = $scope.partner;
+      partner.header.splice(index, 1);
+    };
+	}
+]);
+
+'use strict';
+
+//Categories service used to communicate Categories REST endpoints
+angular.module('core').factory('Partners', ['$resource', '$cookies',
+	function($resource, $cookies) {
+		return $resource('//calm-woodland-4818.herokuapp.com/api/partners/:partnerId/:controller', { partnerId: '@id'},
+    {
+			list: {
+				method: 'GET'
+			},
+			save: {
+				method: 'POST',
+				headers: {'Authorization': $cookies.get('user')}
+			},
+			published: {
+				method: 'GET',
+			},
+			filter: {
+				method: 'GET',
+				params: {
+					controller: 'findOne'
+				}
+			},
+			update: {
+				method: 'PUT',
+				headers: {'Authorization': $cookies.get('user')}
+			}
+		});
 	}
 ]);
 

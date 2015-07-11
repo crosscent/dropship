@@ -164,3 +164,11 @@ angular.module('core').service('Menus', [
 		this.addMenu('topbar', true);
 	}
 ]);
+
+angular.module('core').factory('PageTitle', function() {
+  var title = 'Productmate';
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { title = newTitle; }
+  };
+});

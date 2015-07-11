@@ -1,0 +1,128 @@
+.vcenter {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* partner-view css*/
+.partner-view .carousel {
+  display:block;
+}
+.partner-view .carousel .slider {
+  height: 400px;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.partner-view .name {
+  margin: 2em 0 2em 0;
+}
+.partner-view .left {
+  text-align: right;
+}
+.partner-view .logo{
+  height: 60px;
+}
+.partner-view .title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.partner-view .wrapper {
+  margin: 5px;
+  background: #dddddd;
+}
+.partner-view .image {
+  height: 250px;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.partner-view .image:hover .hover {
+  display: block;
+}
+.partner-view .hover {
+  display: none;
+  background: #c2a878;
+  height: 250px;
+}
+.partner-view .wrapper a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+}
+.partner-view .spec .spec-title {
+  text-align: center;
+  font-weight: 300;
+  padding-bottom: 5px;
+  position: relative;
+}
+.partner-view .spec .spec-title:before {
+  content: "";
+  position: absolute;
+  width: 25%;
+  height: 1px;
+  bottom: 0;
+  left: 37.5%;
+  border-bottom: 1px solid gray;
+}
+.partner-view .spec .spec-descript {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+/* partner-list css*/
+.partner-list .header {
+  text-align: center;
+}
+.partner-list .list-left,
+.partner-list .list-right {
+  position: relative;
+}
+.partner-list .list-left:before,
+.partner-list .list-right:before {
+  content: "";
+  position: absolute;
+  width: 25%;
+  height: 1px;
+  top: 0;
+  left: 37.5%;
+  border-top: 1px solid gray;
+}
+.partner-list .list-left a,
+.partner-list .list-right a {
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0 15px 0 15px;
+}
+.partner-list .image img {
+  width: 200px;
+  display: block;
+  margin: auto;
+}
+.partner-list .list-left .text {
+  float: left;
+}
+.partner-list .list-left .image {
+  float: right;
+}
+.partner-list .list-right .text {
+  float: right;
+}
+.partner-list .list-right .image {
+  float:left;
+}
+.partner-list .list-left {
+  padding: 1em 0 1em 3em;
+  text-align: left;
+}
+.partner-list .list-right {
+  padding: 1em 3em 1em 0;
+  text-align: right;
+}

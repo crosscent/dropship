@@ -1,4 +1,4 @@
-<section data-ng-controller="CategoriesCreateController as categoriesCreateCtrl">
+<section data-ng-controller="CategoriesCreateController as categoriesCreateCtrl" data-ng-init="categoriesCreateCtrl.separate()">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
@@ -11,13 +11,18 @@
           </form>
         </div>
         <div class="row">
-          <a href="#" data-ng-repeat="category in categories" data-ng-href="/backend/category/{{category.slug}}/edit">
+          <a href="#" data-ng-repeat="category in unpublished" data-ng-href="/backend/category/{{category.slug}}/edit">
           <p data-ng-bind="category.name"></p>
           </a>
         </div>
       </div>
       <div class="col-sm-6">
         <h1>Published</h1>
+        <div class="row">
+          <a href="#" data-ng-repeat="category in published" data-ng-href="/backend/category/{{category.slug}}/edit">
+          <p data-ng-bind="category.name"></p>
+          </a>
+        </div>
       </div>
     </div>
   </div>

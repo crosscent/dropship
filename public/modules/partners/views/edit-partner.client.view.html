@@ -1,0 +1,97 @@
+<section data-ng-controller="PartnersEditController as partnersEditCtrl" data-ng-init="partnersEditCtrl.findBySlug()" class="categoryEdit">
+  <div class="container">
+    <h1 data-ng-bind="$stateParams.slug"></h1>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+          <form data-ng-submit="partnersEditCtrl.update(category)">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-2">
+                <div class="form-group">
+                  <textarea type="text" class="form-control title" data-ng-model="partner.name" id="name"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Short Description</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control description" data-ng-model="partner.shortDescription" id="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Long Description</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control description" data-ng-model="partner.longDescription" id="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Logo</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-ng-model="partner.logo" id="logo">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Header</p>
+                <p><a ng-click="partnersEditCtrl.addHeader()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="image in partner.header" class="col-sm-4">
+                    <input type="text" data-ng-model="image.link" id="link" class="form-control name" placeholder="link">
+                    <p><a ng-click="partnersEditCtrl.deleteHeader($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Location</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" data-ng-model="partner.city" id="city" placeholder="city">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" data-ng-model="partner.country" id="country" placeholder="country">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Publish?</p>
+              </div>
+              <div class="col-sm-10">
+                <select data-ng-model="partner.published">
+                  <option value="false">No</option>
+                  <option value="true">True</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Update" class="btn btn-default">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

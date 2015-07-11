@@ -7,7 +7,21 @@ app.controller('CategoriesCreateController', ['$scope', '$location', 'Slug', 'Ca
 	function($scope, $location, Slug, Categories){
 
     // Listing the Categories
-    $scope.categories = Categories.query();
+		$scope.published = [];
+		$scope.unpublished = [];
+    Categories.query().$promise.then(function(list){
+		$scope.categories = list;
+		for(var i=0; i< list.length; i++) {
+			if (list[i].publish === 'true') {
+				$scope.published.push(list[i]);
+			}
+			else {
+				$scope.unpublished.push(list[i]);
+			}
+		}
+		});
+
+
 
 		// Create new Category
 		this.create = function() {
