@@ -1,0 +1,97 @@
+<section data-ng-controller="ArticlesEditController as articlesEditCtrl" data-ng-init="articlesEditCtrl.findBySlug()" class="articlesEdit">
+  <div class="container">
+    <h1 data-ng-bind="$stateParams.slug"></h1>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+          <form data-ng-submit="articlesEditCtrl.update(category)">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-2">
+                <div class="form-group">
+                  <textarea type="text" class="form-control title" data-ng-model="article.name" id="name"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Excerpt</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control exerpt" data-ng-model="article.excerpt" id="excerpt"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Content</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control content" data-ng-model="article.content" id="content"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Image</p>
+                <p><a ng-click="articlesEditCtrl.addImage()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="image in article.image" class="col-sm-4">
+                    <input type="text" data-ng-model="image.link" id="link" class="form-control name" placeholder="Link">
+                    <input type="text" data-ng-model="image.descript" id="descript" class="form-control name" placeholder="Descript">
+                    <p><a ng-click="articlesEditCtrl.deleteImage($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Partner</p>
+                <p><a ng-click="articlesEditCtrl.addPartner()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="partner in article.partner" class="col-sm-4">
+                    <select data-ng-model="partner.id" data-ng-options="partner.id as partner.name for partner in articlesEditCtrl.partners" id="partner" class="form-control"></select>
+                    <p><a ng-click="articlesEditCtrl.deletePartner($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Category</p>
+                <p><a ng-click="articlesEditCtrl.addCategory()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="category in article.category" class="col-sm-4">
+                    <select data-ng-model="category.id" data-ng-options="category.id as category.name for category in articlesEditCtrl.categories" id="category" class="form-control"></select>
+                    <p><a ng-click="articlesEditCtrl.deleteCategory($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Publish?</p>
+              </div>
+              <div class="col-sm-10">
+                <select data-ng-model="article.published">
+                  <option value="false">No</option>
+                  <option value="true">True</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Update" class="btn btn-default">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

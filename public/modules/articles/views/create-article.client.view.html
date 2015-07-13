@@ -1,0 +1,29 @@
+<section data-ng-controller="ArticlesCreateController as articlesCreateCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <form data-ng-submit="articlesCreateCtrl.create()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">New Article</label>
+              <input type="text" class="form-control" data-ng-model="name" id="name" placeholder="Start typing a title for the article here....">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <a href="#" data-ng-repeat="article in unpublished" data-ng-href="/backend/article/{{article.slug}}/edit">
+          <p data-ng-bind="article.name"></p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h1>Published</h1>
+        <div class="row">
+          <a href="#" data-ng-repeat="article in published" data-ng-href="/backend/article/{{article.slug}}/edit">
+          <p data-ng-bind="article.name"></p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
