@@ -12,6 +12,9 @@ module.exports = function() {
   // Initialize Express
   var app = express();
 
+  // Set up Prerender.IO
+  app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN));
+
   // Set up Globbing model
   config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
