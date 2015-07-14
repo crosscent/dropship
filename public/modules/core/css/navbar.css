@@ -1,0 +1,68 @@
+
+.navbar {
+	font-family: 'Source Sans Pro', sans-serif;
+	background-color: #ffffff;
+}
+.brand-name {
+	text-align: center;
+	padding-top: 0.9em;
+}
+.brand-name a {
+	color: black;
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	font-size: 3em;
+	text-decoration: none;
+}
+.brand-name:hover{
+	text-decoration: none;
+}
+.navbar {
+	padding-bottom: 1em;
+
+	margin-bottom: 5px;
+}
+.navbar-nav > li > a {
+	color: #000000;
+	padding: 1em 2em 1em 2em;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 300;
+  font-size: 0.75em;
+}
+
+.navbar-nav .active a	 {
+	color: #FF5252;
+}
+
+.navbar .border{
+	border-top: 1px #DCDCDC solid;
+	border-bottom: 1px #DCDCDC solid;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+	color: #FF5252;
+	background-color: #FFF;
+}
+
+
+@media screen and (min-width:0px) and (max-width:740px) {
+	.brand-name {
+		margin:auto;
+	}
+	.navbar-nav > li > a {
+		padding: 1em 0 1em 0;
+	}
+}
+@media (min-width: 740px) {
+  .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+  }
+
+  .navbar {
+    text-align: center;
+  }
+}
