@@ -1,0 +1,53 @@
+<section data-ng-controller="ProductsController as ProductCtrl" data-ng-init="ProductCtrl.findBySlug()">
+	<div class="product-view">
+		<div class="container-fluid">
+			<div class="horizontalScroll">
+				<div class="wrapper" data-ng-repeat="image in product.image" >
+					<img class="header" data-ng-src="{{image.link}}">
+					<div class="overlay">
+						<p data-ng-bind="image.descript"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-xs-12 left">
+					<p class="category"data-ng-bind="productCategory.name"></p><span data-ng-bind="productPartner.name"></span>
+					<h1 class="title" data-ng-bind="product.name"></h1>
+					<p class="description" data-ng-bind="product.description"></p>
+				</div>
+				<div class="col-sm-4 col-xs-12 right">
+					<div class="row spec border">
+						<div class="col-xs-12">
+							<h2>Details</h2>
+							<div data-ng-repeat="spec in product.specification">
+									<p data-ng-bind="spec.title + ': ' + spec.descript"></p>
+							</div>
+						</div>
+					</div>
+					<div class="row social-media">
+						<div class="col-xs-12">
+							<p class="bold">Share</p>
+							<ul ng-social-buttons
+							     data-url="url">
+							    <li class="ng-social-facebook">Facebook</li>
+							    <li class="ng-social-google-plus">Google+</li>
+							    <li class="ng-social-twitter">Twitter</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == product.user._id))">
+				<a class="btn btn-primary" href="/#!/products/{{product._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-primary" data-ng-click="remove();">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

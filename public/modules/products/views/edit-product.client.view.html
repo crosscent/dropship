@@ -1,0 +1,102 @@
+<section data-ng-controller="ProductsEditController as productsEditCtrl" data-ng-init="productsEditCtrl.findBySlug()" class="productsEdit">
+  <div class="container">
+    <h1 data-ng-bind="$stateParams.slug"></h1>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+          <form data-ng-submit="productsEditCtrl.update(category)">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-2">
+                <div class="form-group">
+                  <textarea type="text" class="form-control title" data-ng-model="product.name" id="name"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Description</p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group">
+                  <textarea type="text" class="form-control exerpt" data-ng-model="product.description" id="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Image</p>
+                <p><a ng-click="productsEditCtrl.addImage()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="image in product.image" class="col-sm-4">
+                    <input type="text" data-ng-model="image.link" id="link" class="form-control name" placeholder="Link">
+                    <input type="text" data-ng-model="image.descript" id="descript" class="form-control name" placeholder="Descript">
+                    <p><a ng-click="productssEditCtrl.deleteImage($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Specifications</p>
+                <p><a ng-click="productsEditCtrl.addSpec()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="spec in product.specification" class="col-sm-4">
+                    <input type="text" data-ng-model="spec.title" id="title" class="form-control name" placeholder="Title">
+                    <input type="text" data-ng-model="spec.descript" id="descript" class="form-control name" placeholder="Descript">
+                    <p><a ng-click="productssEditCtrl.deleteSpec($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Partner</p>
+                <p><a ng-click="productsEditCtrl.addPartner()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="partner in product.partner" class="col-sm-4">
+                    <select data-ng-model="partner.id" data-ng-options="partner.id as partner.name for partner in productsEditCtrl.partners" id="partner" class="form-control"></select>
+                    <p><a ng-click="productsEditCtrl.deletePartner($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Category</p>
+                <p><a ng-click="productsEditCtrl.addCategory()">add</a></p>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <div data-ng-repeat="category in product.category" class="col-sm-4">
+                    <select data-ng-model="category.id" data-ng-options="category.id as category.name for category in productsEditCtrl.categories" id="category" class="form-control"></select>
+                    <p><a ng-click="productsEditCtrl.deleteCategory($index)">delete</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p>Publish?</p>
+              </div>
+              <div class="col-sm-10">
+                <select data-ng-model="product.published">
+                  <option value="false">No</option>
+                  <option value="true">True</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Update" class="btn btn-default">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

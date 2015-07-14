@@ -6,6 +6,6 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'article', 'item', '/article(?:/[^/]+)?', null, null, 2);
+		Menus.addMenuItem('topbar', 'Products', 'product', 'item', '/product(?:/[^/]+)?', null, null, 2);
 	}
 ]);

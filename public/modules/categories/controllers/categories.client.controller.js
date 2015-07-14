@@ -12,7 +12,7 @@ app.controller('CategoriesCreateController', ['$scope', '$location', 'Slug', 'Ca
     Categories.query().$promise.then(function(list){
 		$scope.categories = list;
 		for(var i=0; i< list.length; i++) {
-			if (list[i].publish === 'true') {
+			if (list[i].published === true) {
 				$scope.published.push(list[i]);
 			}
 			else {
