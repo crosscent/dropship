@@ -10,18 +10,14 @@
 .brand-name a {
 	color: black;
 	font-family: 'Playfair Display', serif;
-	font-style: italic;
+  letter-spacing: -0.05em;
 	font-size: 3em;
 	text-decoration: none;
 }
 .brand-name:hover{
 	text-decoration: none;
 }
-.navbar {
-	padding-bottom: 1em;
 
-	margin-bottom: 5px;
-}
 .navbar-nav > li > a {
 	color: #000000;
 	padding: 1em 2em 1em 2em;
@@ -46,6 +42,13 @@
 	background-color: #FFF;
 }
 
+.navbar-toggle {
+	border: 1px solid #000000;
+	color: black;
+}
+.navbar-toggle .icon-bar{
+	color: black;
+}
 
 @media screen and (min-width:0px) and (max-width:740px) {
 	.brand-name {
@@ -53,6 +56,17 @@
 	}
 	.navbar-nav > li > a {
 		padding: 1em 0 1em 0;
+	}
+	.brand-name {
+		text-align: left;
+		padding-top: 0.9em;
+	}
+	.brand-name a {
+		color: black;
+		font-family: 'Playfair Display', serif;
+	  letter-spacing: -0.05em;
+		font-size: 2em;
+		text-decoration: none;
 	}
 }
 @media (min-width: 740px) {

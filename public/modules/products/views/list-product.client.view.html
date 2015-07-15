@@ -1,27 +1,27 @@
 <section data-ng-controller="ProductsController as ProductCtrl" data-ng-init="ProductCtrl.find()">
-    <div class="product-list">
-      <div class="container">
-        <ul>
-          <li><a data-ng-click="setShowCat('')">All</a></li>
-          <li data-ng-repeat="category in ProductCtrl.categories">
-            <a data-ng-bind="category.name" data-ng-click="setShowCat(category.id)"></a>
-          </li>
-        </ul>
-        <div class="list-group">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6 item-list" data-ng-repeat="product in products | filter:showcat">
-              <div class="wrapper">
-                <a data-ng-href="/product/{{product.slug}}">
-                  <div class="image" ng-style="{'background-image':'url({{product.image[0].link}})'}" >
-                    <div class="hover">
-                      <p class="title vertical-center" data-ng-bind="product.name"></p>
-                    </div>
+  <div class="product-list">
+    <div class="container">
+      <ul>
+        <li><a data-ng-click="setShowCat('')">All</a></li>
+        <li data-ng-repeat="category in ProductCtrl.categories">
+          <a data-ng-bind="category.name" data-ng-click="setShowCat(category.id)"></a>
+        </li>
+      </ul>
+      <div class="list-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 item-list" data-ng-repeat="product in products | filter:showcat">
+            <div class="wrapper">
+              <a data-ng-href="/product/{{product.slug}}">
+                <div class="image" ng-style="{'background-image':'url({{product.image[0].link}})'}" >
+                  <div class="hover">
+                    <p class="title vertical-center" data-ng-bind="product.name"></p>
                   </div>
-                </a>
-              </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </section>
