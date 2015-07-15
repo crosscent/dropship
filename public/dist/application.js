@@ -670,7 +670,7 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Partners', 'partner', 'item', '/partner(?:/[^/]+)?', null, null, 7);
+		Menus.addMenuItem('topbar', 'Partners', 'partner', 'item', '/partner(?:/[^/]+)?', null, null, 3);
 	}
 ]);
 
@@ -848,7 +848,7 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Products', 'product', 'item', '/product(?:/[^/]+)?', null, null, 2);
+		Menus.addMenuItem('topbar', 'Shop', 'product', 'item', '/product(?:/[^/]+)?', null, null, 4);
 	}
 ]);
 
@@ -1011,20 +1011,6 @@ app.controller('ProductsEditController', ['$scope', '$stateParams', '$location',
       var product = $scope.product;
       product.partner.splice(index, 1);
     };
-
-		// Add to a  new Category
-		this.addCategory = function() {
-			var product = $scope.product;
-			if(!product.category) {
-				product.category=[];
-			}
-			product.category.push({id: ''});
-		};
-		// Delete a Category
-		this.deletePartner = function(index) {
-			var product = $scope.product;
-			product.category.splice(index, 1);
-		};
 
 		// Add a new image
 		this.addImage = function() {

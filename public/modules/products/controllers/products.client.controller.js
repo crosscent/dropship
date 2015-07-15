@@ -128,20 +128,6 @@ app.controller('ProductsEditController', ['$scope', '$stateParams', '$location',
       product.partner.splice(index, 1);
     };
 
-		// Add to a  new Category
-		this.addCategory = function() {
-			var product = $scope.product;
-			if(!product.category) {
-				product.category=[];
-			}
-			product.category.push({id: ''});
-		};
-		// Delete a Category
-		this.deletePartner = function(index) {
-			var product = $scope.product;
-			product.category.splice(index, 1);
-		};
-
 		// Add a new image
 		this.addImage = function() {
 			var product = $scope.product;
