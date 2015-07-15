@@ -10,7 +10,8 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 		this.find = function() {
 				$rootScope.pageTitle = 'Product List';
 				$scope.products = Products.query(
-					{'filter[where][published]': 'true'}
+					{'filter[where][published]': 'true',
+					'filter[order]': 'id DESC'}
 				);
 		};
 		// Find a list of Partners

@@ -101,7 +101,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
 		this.articles = Articles.query(
-			{'filter[where][published]': 'true'}
+			{'filter[where][published]': 'true',
+			'filter[order]': 'id DESC'}
 		);
 
 		// Find existing Partner
@@ -876,7 +877,8 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 		this.find = function() {
 				$rootScope.pageTitle = 'Product List';
 				$scope.products = Products.query(
-					{'filter[where][published]': 'true'}
+					{'filter[where][published]': 'true',
+					'filter[order]': 'id DESC'}
 				);
 		};
 		// Find a list of Partners

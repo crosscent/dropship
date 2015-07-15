@@ -8,7 +8,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
 		this.articles = Articles.query(
-			{'filter[where][published]': 'true'}
+			{'filter[where][published]': 'true',
+			'filter[order]': 'id DESC'}
 		);
 
 		// Find existing Partner
