@@ -29,11 +29,10 @@
 					<div class="row social-media">
 						<div class="col-xs-12">
 							<p class="bold">Share</p>
-							<ul ng-social-buttons
-							     data-url="url">
-							    <li class="ng-social-facebook">Facebook</li>
-							    <li class="ng-social-google-plus">Google+</li>
-							    <li class="ng-social-twitter">Twitter</li>
+							<ul>
+							    <li><a data-ng-href="http://www.facebook.com/sharer/sharer.php?u={{url}}">Facebook</a></li>
+							    <li><a data-ng-href="https://plus.google.com/share?url={{url}}">Google+</a></li>
+							    <li><a data-ng-href="http://twitter.com/intent/tweet?url={{url}}">Twitter</a></li>
 							</ul>
 						</div>
 					</div>
