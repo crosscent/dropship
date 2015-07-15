@@ -9,7 +9,9 @@ app.controller('CategoriesCreateController', ['$scope', '$location', 'Slug', 'Ca
     // Listing the Categories
 		$scope.published = [];
 		$scope.unpublished = [];
-    Categories.query().$promise.then(function(list){
+    Categories.query(
+			{'filter[order]': 'id DESC'}
+		).$promise.then(function(list){
 		$scope.categories = list;
 		for(var i=0; i< list.length; i++) {
 			if (list[i].published === true) {

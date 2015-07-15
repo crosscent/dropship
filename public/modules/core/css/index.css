@@ -1,0 +1,43 @@
+.index .wrapper {
+  margin: 5px;
+  background: #dddddd;
+}
+.index .first {
+  display: inline-block; /* change the default display type to inline-block */
+  overflow: hidden;      /* hide the overflow */
+  width: 100%;
+}
+.index .image {
+  height: 400px;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  transition: all .2s ease-in-out;
+}
+.index .image:hover {
+  transform: scale(1.05);
+}
+.index .title {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+}
+
+.index a {
+  color: white;
+  font-size: 2em;
+  font-weight: 200;
+}
+.index a:hover {
+  text-decoration: none;
+}
+@media screen and (min-width:0px) and (max-width:740px) {
+  .index .image {
+    height: 250px;
+  }
+  .index a {
+    font-size: 1em;
+  }
+}

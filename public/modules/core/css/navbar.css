@@ -5,13 +5,13 @@
 }
 .brand-name {
 	text-align: center;
-	padding-top: 0.9em;
+	padding-top: 0.2em;
 }
 .brand-name a {
 	color: black;
 	font-family: 'Playfair Display', serif;
   letter-spacing: -0.05em;
-	font-size: 3em;
+	font-size: 2.7em;
 	text-decoration: none;
 }
 .brand-name:hover{
