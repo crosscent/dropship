@@ -14,10 +14,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			data: {
 				pageTitle: 'Home'
 			}
-		}).
-    state('about', {
-			url: '/about',
-			templateUrl: '/public/modules/core/views/about.client.view.html'
 		});
 	}
 ]);

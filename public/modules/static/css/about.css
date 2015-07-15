@@ -1,0 +1,14 @@
+.about .card {
+  width: 400px;
+  margin: auto;
+  display: block;
+  padding: 2em 0 2em 0;
+}
+.about h1 {
+  font-size: 1.2em;
+  text-align: center;
+}
+.about p {
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}

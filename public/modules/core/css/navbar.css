@@ -3,6 +3,10 @@
 	font-family: 'Source Sans Pro', sans-serif;
 	background-color: #ffffff;
 }
+
+.min div {
+	display: none;
+}
 .brand-name {
 	text-align: center;
 	padding-top: 0.2em;
@@ -69,6 +73,12 @@
 		text-decoration: none;
 	}
 }
+@media (max-width: 740px)  {
+	.min div {
+		display: inherit;
+	}
+}
+
 @media (min-width: 740px) {
   .navbar .navbar-nav {
     display: inline-block;

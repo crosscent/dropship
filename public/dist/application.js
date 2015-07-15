@@ -418,10 +418,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			data: {
 				pageTitle: 'Home'
 			}
-		}).
-    state('about', {
-			url: '/about',
-			templateUrl: '/public/modules/core/views/about.client.view.html'
 		});
 	}
 ]);
@@ -476,6 +472,27 @@ angular.module('core').controller('HeaderController', ['$scope', '$rootScope', '
 			}
 		});
 	}
+]);
+
+'use strict';
+
+var app = angular.module('core');
+
+app.directive('scroll', ['$window',
+  function ($window) {
+    return function(scope, element, attrs) {
+        angular.element($window).bind('scroll', function() {
+             if (this.pageYOffset >= 75) {
+                 scope.boolChangeClass = true;
+                 console.log('Scrolled below header.');
+             } else {
+                 scope.boolChangeClass = false;
+                 console.log('Header is in view.');
+             }
+            scope.$apply();
+        });
+    };
+  }
 ]);
 
 'use strict';
@@ -1081,6 +1098,43 @@ angular.module('core').run(['Menus',
 		Menus.addMenuItem('topbar', 'Home', '', 'item', '/(?:/[^/]+)?', null, null, 0);
     Menus.addMenuItem('topbar', 'About', 'about', 'item', '/about(?:/[^/]+)?', null, null, 1);
     Menus.addMenuItem('topbar', 'Contact', 'contact', 'item', '/contact(?:/[^/]+)?', null, null, 9);
+	}
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('core').config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+		// Home state routing
+		$stateProvider.
+    state('about', {
+			url: '/about',
+			templateUrl: '/public/modules/static/views/about.client.view.html'
+		}).
+    state('contact', {
+			url: '/contact',
+			templateUrl: '/public/modules/static/views/contact.client.view.html'
+		});
+	}
+]);
+
+'use strict';
+
+var app = angular.module('core');
+
+
+app.controller('aboutController', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'About';
+	}
+]);
+
+app.controller('contactController', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'Contact';
 	}
 ]);
 

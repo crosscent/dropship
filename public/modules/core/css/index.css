@@ -2,10 +2,13 @@
   margin: 5px;
   background: #dddddd;
 }
-.index .first {
+.index .row {
+  overflow: hidden;
+}
+.index .col-sm-12 {
   display: inline-block; /* change the default display type to inline-block */
   overflow: hidden;      /* hide the overflow */
-  width: 100%;
+  padding: 0;
 }
 .index .image {
   height: 400px;

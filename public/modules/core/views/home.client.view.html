@@ -1,11 +1,27 @@
 <section data-ng-controller="homeController">
   <div class="container index">
-    <div class="first">
-      <a data-ng-href ="/article/{{newArticles[0].slug}}">
-        <div class="image" ng-style="{'background-image':'url(' + newArticles[0].image[0].link + ')'}">
-          <p class="title vertical-center" data-ng-bind="newArticles[0].name"></p>
-        </div>
-      </a>
+    <div class="row">
+      <div class="col-sm-12">
+        <a data-ng-href ="/article/{{newArticles[0].slug}}">
+          <div class="image" ng-style="{'background-image':'url(' + newArticles[0].image[0].link + ')'}">
+            <p class="title vertical-center" data-ng-bind="newArticles[0].name"></p>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <a data-ng-href ="/article/{{newArticles[1].slug}}">
+          <div class="image" ng-style="{'background-image':'url(' + newArticles[1].image[0].link + ')'}">
+            <p class="title vertical-center" data-ng-bind="newArticles[1].name"></p>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <a data-ng-href ="/article/{{newArticles[2].slug}}">
+          <div class="image" ng-style="{'background-image':'url(' + newArticles[2].image[0].link + ')'}">
+            <p class="title vertical-center" data-ng-bind="newArticles[2].name"></p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
