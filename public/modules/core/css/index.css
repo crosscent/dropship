@@ -6,7 +6,6 @@
   overflow: hidden;
 }
 .index .col-sm-12 {
-  display: inline-block; /* change the default display type to inline-block */
   overflow: hidden;      /* hide the overflow */
   padding: 0;
 }
@@ -38,7 +37,7 @@
 }
 @media screen and (min-width:0px) and (max-width:740px) {
   .index .image {
-    height: 250px;
+    height: 200px;
   }
   .index a {
     font-size: 1em;
