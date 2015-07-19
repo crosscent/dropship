@@ -7,8 +7,12 @@
 .about h1 {
   font-size: 1.2em;
   text-align: center;
+  font-weight: 700;
+}
+.about .col-sm-8 .row {
+  padding-bottom: 2em;
 }
 .about p {
-  font-size: 0.8em;
+  font-size: 1em;
   margin-bottom: 1em;
 }
