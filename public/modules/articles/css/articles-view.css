@@ -111,3 +111,14 @@
     font-size: 1.5em;
   }
 }
+
+.articles-view .article-content {
+  padding-top:2em;
+}
+.articles-view .article-content p{
+  padding-bottom: 0.3em;
+  font-size: 1em;
+}
+.articles-view .article-content p b {
+  font-size:1.1em;
+}

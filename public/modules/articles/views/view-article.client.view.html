@@ -51,7 +51,7 @@
 				</small>
 
 
-				<div ng-bind-html="article.content"></div>
+				<div ng-bind-html="article.content" class="article-content"></div>
 
 				<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == article.user._id))">
 					<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
