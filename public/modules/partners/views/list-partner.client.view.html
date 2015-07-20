@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <h1 class="header">Our Collaborating Partners</h1>
       <div class="row" ng-class-odd="'list-left'" ng-class-even="'list-right'" data-ng-repeat="partner in partnersCtrl.partners">
-        <h1><a class="title" href="/partner/{{partner.slug}}" data-ng-bind="partner.name"></a></h1>
         <div class="text col-xs-12 col-sm-8">
-          <p data-ng-bind="partner.shortDescription"></p>
+          <h1><a class="title" href="/partner/{{partner.slug}}" data-ng-bind="partner.name"></a></h1>
+          <p class="" data-ng-bind="partner.shortDescription"></p>
         </div>
         <div class="image col-xs-12 col-sm-4">
-          <a href="/partner/{{partner.slug}}"><img class="responsive" data-ng-src="{{partner.logo}}"></a>
+          <a href="/partner/{{partner.slug}}"><img class="responsive logo" data-ng-src="{{partner.logo}}"></a>
         </div>
       </div>
     </div>

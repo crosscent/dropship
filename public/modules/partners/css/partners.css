@@ -99,7 +99,6 @@
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0 15px 0 15px;
 }
 .partner-list .image img {
   width: 200px;
@@ -125,4 +124,13 @@
 .partner-list .list-right {
   padding: 1em 3em 1em 0;
   text-align: right;
+}
+@media screen and (min-width:0px) and (max-width:740px) {
+  .partner-list .image img {
+    width: 100%;
+  }
+  .partner-list .list-left,
+  .partner-list .list-right{
+    padding: 0;
+  }
 }

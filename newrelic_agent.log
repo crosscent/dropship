@@ -1,0 +1,7 @@
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:21.112Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":40,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:21.795Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:24.609Z","msg":"Platform is not a flavor of linux, omitting docker info","component":"system-info"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:25.619Z","msg":"Request for AWS attribute instance-type timed out","component":"aws-info"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:27.565Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1047335/applications/9889906","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:02:27.566Z","msg":"Connected to collector-123.newrelic.com:443 with agent run ID 42478718879742409.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roys-MacBook-Pro.local","pid":17659,"time":"2015-07-20T09:03:39.970Z","msg":"There was an error in requesting AWS attribute instance-type: connect ETIMEDOUT","component":"aws-info"}
