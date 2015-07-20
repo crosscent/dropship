@@ -8,8 +8,6 @@ var express = require('express'),
   session = require('express-session'),
   cookieParser = require('cookie-parser');
 
-require('newrelic');
-
 module.exports = function() {
   // Initialize Express
   var app = express();
