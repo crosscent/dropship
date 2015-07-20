@@ -75,6 +75,11 @@
   font-size: 0.8em;
 }
 
+.partner-view .partner-content p{
+  padding-bottom: 0.3em;
+  font-size: 1em;
+}
+
 /* partner-list css*/
 .partner-list .header {
   text-align: center;
