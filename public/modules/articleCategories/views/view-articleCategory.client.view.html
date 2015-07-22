@@ -1,0 +1,23 @@
+<section data-ng-controller="ArticleCategoriesViewController as articleViewCtrl">
+    <div class="container articles-list">
+      <h1 class="header">Articles</h1>
+      <div>
+        <div class="row">
+          <div class="col-sm-4 article" data-ng-repeat="article in articles">
+            <div class="wrapper">
+              <a data-ng-href ="/article/{{article.slug}}">
+                <div class="image" ng-style="{'background-image':'url({{article.image[0].link}})'}"></div>
+              </a>
+              <div class="inner">
+                <h1>
+                  <a class="title" data-ng-bind="article.name" data-ng-href ="/article/{{article.slug}}"></a>
+                </h1>
+                <p data-ng-bind="article.excerpt"></p>
+                <p><a class="readmore" data-ng-href ="/article/{{article.slug}}">Read More</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

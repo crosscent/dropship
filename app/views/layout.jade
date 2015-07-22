@@ -2,7 +2,7 @@ doctype html
 html(lang="en", xmlns="http://www.w3.org/1999/xhtml")
 
   head
-    title(ng-bind="pageTitle + ' - SenseForage'")
+    title(ng-bind="pageTitle + ' | SenseForage'")
 
     meta(charset="utf-8")
     meta(http-equiv="Content-type", content="text/html;charset=UTF-8")
@@ -19,7 +19,7 @@ html(lang="en", xmlns="http://www.w3.org/1999/xhtml")
     link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/css?family=Neuton:200,400")
 
     <link href="//crosscent.s3.amazonaws.com/logo.ico" rel="shortcut icon" type="image/x-icon">
-    
+
     for cssFile in cssFiles
       link(rel="stylesheet", href='/'+cssFile)
     base(href="/")

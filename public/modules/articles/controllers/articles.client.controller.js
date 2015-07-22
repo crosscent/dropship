@@ -3,8 +3,8 @@
 var app = angular.module('core');
 
 // Partners controller
-app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'Categories',
-	function($scope, $rootScope, $stateParams, Articles, Partners, Categories) {
+app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
+	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
 		this.articles = Articles.query(
@@ -19,8 +19,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 			).$promise.then(function(item){
 				$scope.article = item;
 				$rootScope.pageTitle = item.name;
-				$scope.articleCategory = Categories.get({
-					categoryId: $scope.article.category[0].id
+				$scope.articleCategory = ArticleCategories.get({
+					categoryId: $scope.article.category
 				});
 				$scope.articlePartner = Partners.get({
 					partnerId: $scope.article.partner[0].id
@@ -71,8 +71,8 @@ app.controller('ArticlesCreateController', ['$scope', '$location', 'Slug', 'Arti
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'Categories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, Categories){
+app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
+	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
 
     // Find existing Product
 		this.findBySlug = function() {
@@ -84,7 +84,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 		// List of Partners
 		this.partners = Partners.query();
 		// List of Categories
-		this.categories = Categories.query();
+		this.categories = ArticleCategories.query();
 
 		// Create new Category
 		this.update = function() {

@@ -57,9 +57,154 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'article', 'item', '/article(?:/[^/]+)?', null, null, 2);
+		Menus.addMenuItem('topbar', 'Lifestyle', 'category/lifestyle', 'item', '', null, null, 2);
+    Menus.addMenuItem('topbar', 'Design', 'category/design', 'item', '', null, null, 3);
+    Menus.addMenuItem('topbar', 'Society', 'category/Society', 'item', '', null, null, 4);
 	}
 ]);
+
+'use strict';
+
+// Setting up route
+angular.module('core').config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+
+		// Home state routing
+		$stateProvider.
+    state('backendArticleCategory', {
+      url: '/backend/articleCategory',
+      templateUrl: '/public/modules/articleCategories/views/create-articleCategory.client.view.html'
+    }).
+    state('backendArticleCategoryEdit', {
+      url: '/backend/articleCategory/:slug/edit',
+      templateUrl: '/public/modules/articleCategories/views/edit-articleCategory.client.view.html'
+    }).
+		state('ArticleCategoryView', {
+			url: '/category/:slug',
+			templateUrl: '/public/modules/articleCategories/views/view-articleCategory.client.view.html'
+		});
+	}
+]);
+
+'use strict';
+
+var app = angular.module('core');
+
+// Categories controller
+app.controller('ArticleCategoriesCreateController', ['$scope', '$location', 'Slug', 'ArticleCategories',
+	function($scope, $location, Slug, ArticleCategories){
+
+    // Listing the Categories
+		$scope.published = [];
+		$scope.unpublished = [];
+    ArticleCategories.query(
+			{'filter[order]': 'id DESC'}
+		).$promise.then(function(list){
+		$scope.categories = list;
+		for(var i=0; i< list.length; i++) {
+			if (list[i].published === true) {
+				$scope.published.push(list[i]);
+			}
+			else {
+				$scope.unpublished.push(list[i]);
+			}
+		}
+		});
+
+
+
+		// Create new Category
+		this.create = function() {
+			// Create new Category object
+			var category = new ArticleCategories ({
+				name: $scope.name,
+        slug: Slug.slugify($scope.name)
+			});
+
+			// Redirect after save
+			category.$save(function(response) {
+				$location.path('/backend/articleCategory');
+        $scope.categories = ArticleCategories.query();
+				// Clear form fields
+				$scope.name = '';
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+
+app.controller('ArticleCategoriesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'ArticleCategories',
+	function($scope, $stateParams, $location, Slug, ArticleCategories){
+
+    // Find existing Product
+		this.findBySlug = function() {
+			$scope.category = ArticleCategories.filter(
+				{'filter[where][slug]': $stateParams.slug}
+			);
+		};
+
+		// Create new Category
+		this.update = function() {
+			// Create new Category object
+			var category = $scope.category;
+      category.slug = Slug.slugify(category.name);
+      category.$update(function(){
+        $location.path('/backend/articleCategory');
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+		};
+	}
+]);
+
+app.controller('ArticleCategoriesViewController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'ArticleCategories',
+	function($scope, $rootScope, $stateParams, Articles, ArticleCategories) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'Article List';
+		ArticleCategories.filter(
+			{'filter[where][published]': 'true',
+			'filter[where][slug]': $stateParams.slug}
+		).$promise.then(function(list){
+			$rootScope.pageTitle = list.name;
+			$scope.articles = Articles.query(
+				{'filter[where][published]': 'true',
+				'filter[where][category]' : list.id,
+				'filter[order]': 'id DESC'}
+			);
+		});
+	}
+]);
+
+'use strict';
+
+//Categories service used to communicate Categories REST endpoints
+angular.module('core').factory('ArticleCategories', ['$resource', '$cookies',
+	function($resource, $cookies) {
+		return $resource('//calm-woodland-4818.herokuapp.com/api/articleCategories/:categoryId/:controller', { categoryId: '@id'},
+    {
+			list: {
+				method: 'GET'
+			},
+			save: {
+				method: 'POST',
+				headers: {'Authorization': $cookies.get('user')}
+			},
+			filter: {
+				method: 'GET',
+				params: {
+					controller: 'findOne'
+				}
+			},
+			update: {
+				method: 'PUT',
+				headers: {'Authorization': $cookies.get('user')}
+			}
+		});
+	}
+]);
+
 
 'use strict';
 
@@ -96,8 +241,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 var app = angular.module('core');
 
 // Partners controller
-app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'Categories',
-	function($scope, $rootScope, $stateParams, Articles, Partners, Categories) {
+app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
+	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
 		this.articles = Articles.query(
@@ -112,8 +257,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 			).$promise.then(function(item){
 				$scope.article = item;
 				$rootScope.pageTitle = item.name;
-				$scope.articleCategory = Categories.get({
-					categoryId: $scope.article.category[0].id
+				$scope.articleCategory = ArticleCategories.get({
+					categoryId: $scope.article.category
 				});
 				$scope.articlePartner = Partners.get({
 					partnerId: $scope.article.partner[0].id
@@ -164,8 +309,8 @@ app.controller('ArticlesCreateController', ['$scope', '$location', 'Slug', 'Arti
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'Categories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, Categories){
+app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
+	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
 
     // Find existing Product
 		this.findBySlug = function() {
@@ -177,7 +322,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 		// List of Partners
 		this.partners = Partners.query();
 		// List of Categories
-		this.categories = Categories.query();
+		this.categories = ArticleCategories.query();
 
 		// Create new Category
 		this.update = function() {
@@ -670,7 +815,7 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Partners', 'partner', 'item', '/partner(?:/[^/]+)?', null, null, 3);
+		Menus.addMenuItem('topbar', 'Partners', 'partner', 'item', '/partner(?:/[^/]+)?', null, null, 8);
 	}
 ]);
 
@@ -848,7 +993,7 @@ angular.module('core').run(['Menus',
 		// Set top bar menu items
 		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
     // Set top bar menu items
-		Menus.addMenuItem('topbar', 'Shop', 'product', 'item', '/product(?:/[^/]+)?', null, null, 4);
+		Menus.addMenuItem('topbar', 'Shop', 'product', 'item', '/product(?:/[^/]+)?', null, null, 9);
 	}
 ]);
 

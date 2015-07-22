@@ -1,0 +1,22 @@
+.categoryEdit .title {
+  font-size: 40px;
+  font-weight: 700;
+  height: 70px;
+  background: none;
+  border: none;
+  resize: none;
+  box-shadow: none;
+}
+.categoryEdit .description {
+  font-size: 18px;
+  height: 200px;
+}
+
+.categoryEdit .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,29 @@
+<section data-ng-controller="ArticleCategoriesCreateController as articleCategoriesCreateCtrl" data-ng-init="articleCategoriesCreateCtrl.separate()">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <form data-ng-submit="articleCategoriesCreateCtrl.create()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">New Category</label>
+              <input type="text" class="form-control" data-ng-model="name" id="name" placeholder="Start typing a title for the category here....">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <a href="#" data-ng-repeat="category in unpublished" data-ng-href="/backend/articleCategory/{{category.slug}}/edit">
+          <p data-ng-bind="category.name"></p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h1>Published</h1>
+        <div class="row">
+          <a href="#" data-ng-repeat="category in published" data-ng-href="/backend/articleCategory/{{category.slug}}/edit">
+          <p data-ng-bind="category.name"></p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
