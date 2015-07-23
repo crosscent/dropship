@@ -163,6 +163,9 @@ app.controller('ArticleCategoriesViewController', ['$scope', '$rootScope', '$sta
 	function($scope, $rootScope, $stateParams, Articles, ArticleCategories) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		ArticleCategories.filter(
 			{'filter[where][published]': 'true',
 			'filter[where][slug]': $stateParams.slug}
@@ -240,11 +243,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 var app = angular.module('core');
 
-// Partners controller
+// Articles controller
 app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
 	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
-		// Find a list of Partners
+		// Find a list of Articles
 		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		this.articles = Articles.query(
 			{'filter[where][published]': 'true',
 			'filter[order]': 'id DESC'}
@@ -257,6 +263,9 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 			).$promise.then(function(item){
 				$scope.article = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.excerpt;
+				$rootScope.metaImage = item.image[0].link;
 				$scope.articleCategory = ArticleCategories.get({
 					categoryId: $scope.article.category
 				});
@@ -576,6 +585,9 @@ app.controller('homeController', ['$scope', '$rootScope', 'Articles',
 	function($scope, $rootScope, Articles) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Platform for the cultural creatives';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'Exceeding the requirements of the term “Cultural Creatives”, defined by Paul H. Ray and Sherry Ruth Anderson, SenseForage is a platform that satisfies the craving of the modern-day intellects to make the world a better place.';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 
 		$scope.newArticles = Articles.query(
 			{'filter[limit]': '3',
@@ -858,6 +870,9 @@ app.controller('PartnersController', ['$scope', '$rootScope', '$stateParams', 'P
 	function($scope, $rootScope, $stateParams, Partners) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Partner List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of collaborating partners of Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		this.partners = Partners.query(
 			{'filter[where][published]': 'true'}
 		);
@@ -869,6 +884,9 @@ app.controller('PartnersController', ['$scope', '$rootScope', '$stateParams', 'P
 			).$promise.then(function(item){
 				$scope.partner = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.shortDescription;
+				$rootScope.metaImage = item.logo;
 			});
 			$scope.slides = [1,2,3,4,5];
 		};
@@ -1038,6 +1056,9 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 		// Find a list of Products
 		this.find = function() {
 				$rootScope.pageTitle = 'Product List';
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = 'Some of the work of arts by our partners';
+				$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 				$scope.products = Products.query(
 					{'filter[where][published]': 'true',
 					'filter[order]': 'id DESC'}
@@ -1053,6 +1074,9 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 			).$promise.then(function(item){
 				$scope.product = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.description;
+				$rootScope.metaImage = item.image[0].link;
 				$scope.productCategory = Categories.get({
 					categoryId: $scope.product.category[0].id
 				});
@@ -1259,6 +1283,9 @@ app.controller('aboutController', ['$scope', '$rootScope',
 	function($scope, $rootScope) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'About';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'Exceeding the requirements of the term “Cultural Creatives”, defined by Paul H. Ray and Sherry Ruth Anderson, SenseForage is a platform that satisfies the craving of the modern-day intellects to make the world a better place.';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 	}
 ]);
 
@@ -1266,6 +1293,9 @@ app.controller('contactController', ['$scope', '$rootScope',
 	function($scope, $rootScope) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Contact';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'Exceeding the requirements of the term “Cultural Creatives”, defined by Paul H. Ray and Sherry Ruth Anderson, SenseForage is a platform that satisfies the craving of the modern-day intellects to make the world a better place.';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 	}
 ]);
 

@@ -7,6 +7,9 @@ app.controller('PartnersController', ['$scope', '$rootScope', '$stateParams', 'P
 	function($scope, $rootScope, $stateParams, Partners) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Partner List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of collaborating partners of Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		this.partners = Partners.query(
 			{'filter[where][published]': 'true'}
 		);
@@ -18,6 +21,9 @@ app.controller('PartnersController', ['$scope', '$rootScope', '$stateParams', 'P
 			).$promise.then(function(item){
 				$scope.partner = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.shortDescription;
+				$rootScope.metaImage = item.logo;
 			});
 			$scope.slides = [1,2,3,4,5];
 		};

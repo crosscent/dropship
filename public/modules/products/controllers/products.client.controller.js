@@ -9,6 +9,9 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 		// Find a list of Products
 		this.find = function() {
 				$rootScope.pageTitle = 'Product List';
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = 'Some of the work of arts by our partners';
+				$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 				$scope.products = Products.query(
 					{'filter[where][published]': 'true',
 					'filter[order]': 'id DESC'}
@@ -24,6 +27,9 @@ app.controller('ProductsController', ['$scope', '$rootScope', '$stateParams', 'P
 			).$promise.then(function(item){
 				$scope.product = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.description;
+				$rootScope.metaImage = item.image[0].link;
 				$scope.productCategory = Categories.get({
 					categoryId: $scope.product.category[0].id
 				});

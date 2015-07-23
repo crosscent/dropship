@@ -75,6 +75,9 @@ app.controller('ArticleCategoriesViewController', ['$scope', '$rootScope', '$sta
 	function($scope, $rootScope, $stateParams, Articles, ArticleCategories) {
 		// Find a list of Partners
 		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		ArticleCategories.filter(
 			{'filter[where][published]': 'true',
 			'filter[where][slug]': $stateParams.slug}

@@ -2,11 +2,14 @@
 
 var app = angular.module('core');
 
-// Partners controller
+// Articles controller
 app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
 	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
-		// Find a list of Partners
+		// Find a list of Articles
 		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
 		this.articles = Articles.query(
 			{'filter[where][published]': 'true',
 			'filter[order]': 'id DESC'}
@@ -19,6 +22,9 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 			).$promise.then(function(item){
 				$scope.article = item;
 				$rootScope.pageTitle = item.name;
+				$rootScope.metaKeywords = 'culture, self-development, global issues';
+				$rootScope.metaDescription = item.excerpt;
+				$rootScope.metaImage = item.image[0].link;
 				$scope.articleCategory = ArticleCategories.get({
 					categoryId: $scope.article.category
 				});
