@@ -1,0 +1,39 @@
+<section data-ng-controller="TermsCreateController as termsCreateCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="row">
+        <form data-ng-submit="termsCreateCtrl.create()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">New Term</label>
+            <input type="text" class="form-control" data-ng-model="name" placeholder="Start typing a title for the article here....">
+            <label>
+              <input type="radio" class="fomr-control" data-ng-model="taxonomy" value="article">
+              Article Category
+            </label>
+            <label>
+              <input type="radio" class="fomr-control" data-ng-model="taxonomy" value="product">
+              Product Category
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <label for="exampleInputEmail1">New Article Category</label>
+          <a href="#" data-ng-repeat="term in article" data-ng-href="/backend/terms/{{term.slug}}/edit">
+          <p data-ng-bind="term.name"></p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <label for="exampleInputEmail1">New Product Category</label>
+          <a href="#" data-ng-repeat="term in product" data-ng-href="/backend/terms/{{term.slug}}/edit">
+          <p data-ng-bind="term.name"></p>
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
