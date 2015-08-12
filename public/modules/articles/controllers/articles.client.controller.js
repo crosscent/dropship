@@ -77,8 +77,8 @@ app.controller('ArticlesCreateController', ['$scope', '$location', 'Slug', 'Arti
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
+app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'Terms',
+	function($scope, $stateParams, $location, Slug, Articles, Partners, Terms){
 
     // Find existing Product
 		this.findBySlug = function() {
@@ -90,7 +90,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 		// List of Partners
 		this.partners = Partners.query();
 		// List of Categories
-		this.categories = ArticleCategories.query();
+		this.categories = Terms.query({'filter[where][taxonomy]': 'article'});
 
 		// Create new Category
 		this.update = function() {

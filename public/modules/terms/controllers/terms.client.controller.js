@@ -38,7 +38,7 @@ app.controller('TermsCreateController', ['$scope', '$location', 'Slug', 'Terms',
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
+app.controller('TermsEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
 	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
 
     // Find existing Product
