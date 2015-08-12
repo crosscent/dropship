@@ -24,6 +24,10 @@ angular.module('core').factory('Terms', ['$resource', '$cookies',
 			update: {
 				method: 'PUT',
 				headers: {'Authorization': $cookies.get('user')}
+			},
+			delete: {
+				method: 'DELETE',
+				headers: {'Authorization': $cookies.get('user')}
 			}
 		});
 	}

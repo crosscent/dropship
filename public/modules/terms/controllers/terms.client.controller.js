@@ -38,73 +38,37 @@ app.controller('TermsCreateController', ['$scope', '$location', 'Slug', 'Terms',
 	}
 ]);
 
-app.controller('TermsEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
+app.controller('TermsEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Terms',
+	function($scope, $stateParams, $location, Slug, Terms){
 
-    // Find existing Product
+    // Find Term by slug
 		this.findBySlug = function() {
-			$scope.article = Articles.filter(
+			$scope.term = Terms.filter(
 				{'filter[where][slug]': $stateParams.slug}
 			);
 		};
 
-		// List of Partners
-		this.partners = Partners.query();
-		// List of Categories
-		this.categories = ArticleCategories.query();
 
-		// Create new Category
+		// Update the Term
 		this.update = function() {
 			// Create new Category object
-			var article = $scope.article;
-      article.slug = Slug.slugify(article.name);
-      article.$update(function(){
-        $location.path('/backend/article');
+			var term = $scope.term;
+      term.slug = Slug.slugify(term.name);
+      term.$update(function(){
+        $location.path('/backend/terms');
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
 		};
 
-    // Add to a  new Partner
-    this.addPartner = function() {
-      var article = $scope.article;
-      if(!article.partner) {
-        article.partner=[];
-      }
-      article.partner.push({id: ''});
-    };
-    // Delete a Partner
-    this.deletePartner = function(index) {
-      var article = $scope.article;
-      article.partner.splice(index, 1);
-    };
-
-		// Add to a  new Category
-		this.addCategory = function() {
-			var article = $scope.article;
-			if(!article.category) {
-				article.category=[];
-			}
-			article.category.push({id: ''});
-		};
-		// Delete a Category
-		this.deletePartner = function(index) {
-			var article = $scope.article;
-			article.category.splice(index, 1);
-		};
-
-		// Add a new image
-		this.addImage = function() {
-			var article = $scope.article;
-			if(!article.image) {
-				article.image=[];
-			}
-			article.image.push({link: '', descript: ''});
-		};
-		// Delete image
-		this.deleteImage = function(index) {
-			var article = $scope.article;
-			article.image.splice(index, 1);
+		// Delete the term
+		this.delete = function(){
+			var term = $scope.term;
+			term.$delete(function(){
+				$location.path('/backend/terms');
+			}, function(errorResponse){
+				$scope.error = errorResponse.data.message;
+			});
 		};
 	}
 ]);
