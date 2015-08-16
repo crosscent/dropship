@@ -72,3 +72,22 @@ app.controller('TermsEditController', ['$scope', '$stateParams', '$location', 'S
 		};
 	}
 ]);
+app.controller('TermsViewController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Terms',
+	function($scope, $rootScope, $stateParams, Articles, Terms) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
+		Terms.filter(
+			{'filter[where][slug]': $stateParams.slug}
+		).$promise.then(function(list){
+			$rootScope.pageTitle = list.name;
+			$scope.articles = Articles.query(
+				{'filter[where][published]': 'true',
+				'filter[where][category]' : list.id,
+				'filter[order]': 'id DESC'}
+			);
+		});
+	}
+]);

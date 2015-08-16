@@ -80,7 +80,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: '/public/modules/articleCategories/views/edit-articleCategory.client.view.html'
     }).
 		state('ArticleCategoryView', {
-			url: '/category/:slug',
+			url: '/category2/:slug',
 			templateUrl: '/public/modules/articleCategories/views/view-articleCategory.client.view.html'
 		});
 	}
@@ -244,8 +244,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 var app = angular.module('core');
 
 // Articles controller
-app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
+app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'Terms',
+	function($scope, $rootScope, $stateParams, Articles, Partners, Terms) {
 		// Find a list of Articles
 		$rootScope.pageTitle = 'Article List';
 		$rootScope.metaKeywords = 'culture, self-development, global issues';
@@ -266,8 +266,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 				$rootScope.metaKeywords = 'culture, self-development, global issues';
 				$rootScope.metaDescription = item.excerpt;
 				$rootScope.metaImage = item.image[0].link;
-				$scope.articleCategory = ArticleCategories.get({
-					categoryId: $scope.article.category
+				$scope.articleCategory = Terms.get({
+					termsId: $scope.article.category
 				});
 				$scope.articlePartner = Partners.get({
 					partnerId: $scope.article.partner[0].id
@@ -318,8 +318,8 @@ app.controller('ArticlesCreateController', ['$scope', '$location', 'Slug', 'Arti
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
+app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'Terms',
+	function($scope, $stateParams, $location, Slug, Articles, Partners, Terms){
 
     // Find existing Product
 		this.findBySlug = function() {
@@ -331,7 +331,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 		// List of Partners
 		this.partners = Partners.query();
 		// List of Categories
-		this.categories = ArticleCategories.query();
+		this.categories = Terms.query({'filter[where][taxonomy]': 'article'});
 
 		// Create new Category
 		this.update = function() {
@@ -1312,7 +1312,11 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     state('backendTermsEdit', {
       url: '/backend/terms/:slug/edit',
       templateUrl: '/public/modules/terms/views/edit-terms.client.view.html'
-    });
+    }).
+		state('TermsView', {
+			url: '/category/:slug',
+			templateUrl: '/public/modules/terms/views/view-terms.client.view.html'
+		});
 	}
 ]);
 
@@ -1356,74 +1360,57 @@ app.controller('TermsCreateController', ['$scope', '$location', 'Slug', 'Terms',
 	}
 ]);
 
-app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $stateParams, $location, Slug, Articles, Partners, ArticleCategories){
+app.controller('TermsEditController', ['$scope', '$stateParams', '$location', 'Slug', 'Terms',
+	function($scope, $stateParams, $location, Slug, Terms){
 
-    // Find existing Product
+    // Find Term by slug
 		this.findBySlug = function() {
-			$scope.article = Articles.filter(
+			$scope.term = Terms.filter(
 				{'filter[where][slug]': $stateParams.slug}
 			);
 		};
 
-		// List of Partners
-		this.partners = Partners.query();
-		// List of Categories
-		this.categories = ArticleCategories.query();
 
-		// Create new Category
+		// Update the Term
 		this.update = function() {
 			// Create new Category object
-			var article = $scope.article;
-      article.slug = Slug.slugify(article.name);
-      article.$update(function(){
-        $location.path('/backend/article');
+			var term = $scope.term;
+      term.slug = Slug.slugify(term.name);
+      term.$update(function(){
+        $location.path('/backend/terms');
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
 		};
 
-    // Add to a  new Partner
-    this.addPartner = function() {
-      var article = $scope.article;
-      if(!article.partner) {
-        article.partner=[];
-      }
-      article.partner.push({id: ''});
-    };
-    // Delete a Partner
-    this.deletePartner = function(index) {
-      var article = $scope.article;
-      article.partner.splice(index, 1);
-    };
-
-		// Add to a  new Category
-		this.addCategory = function() {
-			var article = $scope.article;
-			if(!article.category) {
-				article.category=[];
-			}
-			article.category.push({id: ''});
+		// Delete the term
+		this.delete = function(){
+			var term = $scope.term;
+			term.$delete(function(){
+				$location.path('/backend/terms');
+			}, function(errorResponse){
+				$scope.error = errorResponse.data.message;
+			});
 		};
-		// Delete a Category
-		this.deletePartner = function(index) {
-			var article = $scope.article;
-			article.category.splice(index, 1);
-		};
-
-		// Add a new image
-		this.addImage = function() {
-			var article = $scope.article;
-			if(!article.image) {
-				article.image=[];
-			}
-			article.image.push({link: '', descript: ''});
-		};
-		// Delete image
-		this.deleteImage = function(index) {
-			var article = $scope.article;
-			article.image.splice(index, 1);
-		};
+	}
+]);
+app.controller('TermsViewController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Terms',
+	function($scope, $rootScope, $stateParams, Articles, Terms) {
+		// Find a list of Partners
+		$rootScope.pageTitle = 'Article List';
+		$rootScope.metaKeywords = 'culture, self-development, global issues';
+		$rootScope.metaDescription = 'A list of articles available on Sense Forage';
+		$rootScope.metaImage = '//crosscent.s3.amazonaws.com/logo.ico';
+		Terms.filter(
+			{'filter[where][slug]': $stateParams.slug}
+		).$promise.then(function(list){
+			$rootScope.pageTitle = list.name;
+			$scope.articles = Articles.query(
+				{'filter[where][published]': 'true',
+				'filter[where][category]' : list.id,
+				'filter[order]': 'id DESC'}
+			);
+		});
 	}
 ]);
 
@@ -1432,7 +1419,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 //Categories service used to communicate Categories REST endpoints
 angular.module('core').factory('Terms', ['$resource', '$cookies',
 	function($resource, $cookies) {
-		return $resource('//calm-woodland-4818.herokuapp.com/api/terms/:articleId/:controller', { articleId: '@id'},
+		return $resource('//calm-woodland-4818.herokuapp.com/api/terms/:termsId/:controller', { termsId: '@id'},
     {
 			list: {
 				method: 'GET'
@@ -1452,6 +1439,10 @@ angular.module('core').factory('Terms', ['$resource', '$cookies',
 			},
 			update: {
 				method: 'PUT',
+				headers: {'Authorization': $cookies.get('user')}
+			},
+			delete: {
+				method: 'DELETE',
 				headers: {'Authorization': $cookies.get('user')}
 			}
 		});

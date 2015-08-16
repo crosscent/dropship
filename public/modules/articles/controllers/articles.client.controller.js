@@ -3,8 +3,8 @@
 var app = angular.module('core');
 
 // Articles controller
-app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'ArticleCategories',
-	function($scope, $rootScope, $stateParams, Articles, Partners, ArticleCategories) {
+app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'Articles', 'Partners', 'Terms',
+	function($scope, $rootScope, $stateParams, Articles, Partners, Terms) {
 		// Find a list of Articles
 		$rootScope.pageTitle = 'Article List';
 		$rootScope.metaKeywords = 'culture, self-development, global issues';
@@ -25,8 +25,8 @@ app.controller('ArticlesController', ['$scope', '$rootScope', '$stateParams', 'A
 				$rootScope.metaKeywords = 'culture, self-development, global issues';
 				$rootScope.metaDescription = item.excerpt;
 				$rootScope.metaImage = item.image[0].link;
-				$scope.articleCategory = ArticleCategories.get({
-					categoryId: $scope.article.category
+				$scope.articleCategory = Terms.get({
+					termsId: $scope.article.category
 				});
 				$scope.articlePartner = Partners.get({
 					partnerId: $scope.article.partner[0].id

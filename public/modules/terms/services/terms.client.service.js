@@ -3,7 +3,7 @@
 //Categories service used to communicate Categories REST endpoints
 angular.module('core').factory('Terms', ['$resource', '$cookies',
 	function($resource, $cookies) {
-		return $resource('//calm-woodland-4818.herokuapp.com/api/terms/:articleId/:controller', { articleId: '@id'},
+		return $resource('//calm-woodland-4818.herokuapp.com/api/terms/:termsId/:controller', { termsId: '@id'},
     {
 			list: {
 				method: 'GET'

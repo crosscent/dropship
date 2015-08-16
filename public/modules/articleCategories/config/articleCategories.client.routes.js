@@ -15,7 +15,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: '/public/modules/articleCategories/views/edit-articleCategory.client.view.html'
     }).
 		state('ArticleCategoryView', {
-			url: '/category/:slug',
+			url: '/category2/:slug',
 			templateUrl: '/public/modules/articleCategories/views/view-articleCategory.client.view.html'
 		});
 	}

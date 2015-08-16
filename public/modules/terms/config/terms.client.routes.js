@@ -11,6 +11,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     state('backendTermsEdit', {
       url: '/backend/terms/:slug/edit',
       templateUrl: '/public/modules/terms/views/edit-terms.client.view.html'
-    });
+    }).
+		state('TermsView', {
+			url: '/category/:slug',
+			templateUrl: '/public/modules/terms/views/view-terms.client.view.html'
+		});
 	}
 ]);
