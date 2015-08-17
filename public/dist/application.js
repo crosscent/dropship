@@ -301,7 +301,8 @@ app.controller('ArticlesCreateController', ['$scope', '$location', 'Slug', 'Arti
 			// Create new Category object
 			var article = new Articles ({
 				name: $scope.name,
-        slug: Slug.slugify($scope.name)
+        slug: Slug.slugify($scope.name),
+				createdDate: new Date().toISOString()
 			});
 
 			// Redirect after save
@@ -338,6 +339,7 @@ app.controller('ArticlesEditController', ['$scope', '$stateParams', '$location',
 			// Create new Category object
 			var article = $scope.article;
       article.slug = Slug.slugify(article.name);
+			article.modifiedDate = new Date().toISOString();
       article.$update(function(){
         $location.path('/backend/article');
       }, function(errorResponse) {
@@ -1408,6 +1410,7 @@ app.controller('TermsViewController', ['$scope', '$rootScope', '$stateParams', '
 			$scope.articles = Articles.query(
 				{'filter[where][published]': 'true',
 				'filter[where][category]' : list.id,
+				'filter[where][publishedDate][lte]': new Date().toISOString(),
 				'filter[order]': 'id DESC'}
 			);
 		});

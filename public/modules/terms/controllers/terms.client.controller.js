@@ -86,6 +86,7 @@ app.controller('TermsViewController', ['$scope', '$rootScope', '$stateParams', '
 			$scope.articles = Articles.query(
 				{'filter[where][published]': 'true',
 				'filter[where][category]' : list.id,
+				'filter[where][publishedDate][lte]': new Date().toISOString(),
 				'filter[order]': 'id DESC'}
 			);
 		});
