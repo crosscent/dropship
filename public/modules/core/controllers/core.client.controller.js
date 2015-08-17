@@ -14,6 +14,7 @@ app.controller('homeController', ['$scope', '$rootScope', 'Articles',
 		$scope.newArticles = Articles.query(
 			{'filter[limit]': '3',
 			'filter[where][published]': 'true',
+			'filter[where][publishedDate][lte]': new Date().toISOString(),
 			'filter[order]': 'id DESC'}
 		);
 	}
